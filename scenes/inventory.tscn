@@ -22,7 +22,7 @@ text = "Inventory"
 [node name="inventory" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 pause_mode = 2
 margin_top = 18.0
-margin_right = 30.0
+margin_right = 1024.0
 margin_bottom = 18.0
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
