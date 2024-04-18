@@ -1,4 +1,5 @@
 ## Implementasi sprint
+Untuk melakukan aksi sprint, diperlukan input mapping baru. Jadi di buat input mapping bernama ctrl dengan mapping ke key 'control'
 Dilakukan dengan memanfaatkan algoritma berikut pada file player.gd
 ```
 func handle_crouch(movement_vector):
@@ -18,6 +19,7 @@ dan pada function _physics_process(delta) ditambahkan
 		is_sprinting = false
 ```
 ## Implementasi crouch
+Untuk melakukan aksi crouch, diperlukan input mapping baru. Jadi di buat input mapping bernama shift dengan mapping ke key 'shift'
 Dimanfaatkan algoritma berikut pada file plaer.gd
 ```
 func handle_crouch(movement_vector):
@@ -37,6 +39,8 @@ dan pada function _physics_process(delta) ditambahkan
 ```
 
 ## Implementasi inventory
+Untuk membuka inventory, diperlukan input mapping baru. Jadi di buat input mapping bernama Inventory dengan mapping ke key 'i'
+
 pada player.gd ditambahkan kode
 ```
 func handle_inventory():
@@ -55,3 +59,54 @@ dan pada function _physics_process(delta) ditambahkan line berikut
 ```
 handle_inventory()
 ```
+
+dan juga disiapkan scene sebagai berikut
+![image](https://github.com/KenKomKom/gamedev-tutorial-7/assets/119410845/2c6439e9-2c77-4777-bcf6-e9a4e292b2bb)
+yang akan dimasukkan juga ke player.gd
+lalu dibuat item_button.tscn yang memiliki kode
+```
+extends Button
+
+var dir_to_scene : String
+
+func _on_Button_pressed():
+	var prefab = load(dir_to_scene)
+	var instance = prefab.instance()
+	var canvas_layer = $".".get_parent().get_parent().get_parent().get_parent()
+	var player = canvas_layer.get_parent()
+	var level = player.get_parent()
+	instance.global_transform.origin = player.get_dir()
+	level.add_child(instance)
+	get_tree().paused=false
+	player.handle_inventory()
+	self.queue_free()
+```
+Untuk bisa mengeluarkan item di inventory ketika ditekan tombolnya
+
+Selain itu,, diperlukan juga benda benda yang bisa dimasukkan ke dalam inventory. Maka Box.tscn dan objlamp.tscn diberikan kode yang membuatnya menjadi interactable. Dengan kode berikut
+```
+var dir_to_scene = "res://scenes/objlamp.tscn"
+...
+func interact():
+	Inventorymanager.emit_signal("add_item", dir_to_scene, "lamp")
+	self.queue_free()
+```
+Untuk objlamp.tscn
+dan untuk Box.tscn ditambahkan kode
+```
+extends Interactable
+
+var dir_to_scene = "res://scenes/Box.tscn"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func interact():
+	Inventorymanager.emit_signal("add_item", dir_to_scene, "Box")
+	self.queue_free()
+```
+## Implementasi level 2
+Kemudian untuk level 2. Dibuat seperti level 1. Dibuat scene level2 terlebih dahulu, kemudian dibuat world2 dan pada world tersebut diberikan gscbox agar menjadi level. Untuk pelengkap, ditambahkan winscreen.tscn dengan struktur berikut
+![image](https://github.com/KenKomKom/gamedev-tutorial-7/assets/119410845/06246e66-4bde-48e4-8a94-b5a161350735)
+yang akan dipanggil ketika player berhasil menyelesaikan level 2.
