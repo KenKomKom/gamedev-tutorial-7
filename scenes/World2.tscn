@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/area_trigger.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.427451, 0.741176, 0.466667, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=1]
+
+[node name="World2" type="Spatial"]
+
+[node name="OmniLight" type="OmniLight" parent="."]
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 0.10922, 0, -0.351441, 0, 0.368022, 0, 0.351441, 0, 0.10922, 5.98378, -3.55289, -0.315532 )
+use_collision = true
+width = 4.0
+depth = 6.0
+material = SubResource( 3 )
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( 0.10922, 0, -0.351441, 0, 0.368022, 0, 0.351441, 0, 0.10922, 3.18122, -3.5727, 2.43664 )
+use_collision = true
+width = 4.0
+depth = 4.0
+material = SubResource( 3 )
+
+[node name="CSGBox9" type="CSGBox" parent="."]
+transform = Transform( 0.10922, 0, -0.351441, 0, 0.368022, 0, 0.351441, 0, 0.10922, 8.87169, -3.5727, 0.668178 )
+use_collision = true
+width = 6.0
+depth = 6.0
+material = SubResource( 3 )
+
+[node name="CSGBox10" type="CSGBox" parent="."]
+transform = Transform( 0.10922, 0, -0.351441, 0, 0.368022, 0, 0.351441, 0, 0.10922, 11.4469, -3.5727, -0.854681 )
+use_collision = true
+width = 4.0
+depth = 4.0
+material = SubResource( 3 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+invert_faces = true
+width = 6.0
+height = 5.0
+depth = 7.0
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.8739 )
+invert_faces = true
+width = 6.0
+height = 5.0
+depth = 7.0
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6156, 0, 0 )
+invert_faces = true
+width = 6.0
+height = 5.0
+depth = 7.0
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.69973, -7.08074, 0 )
+invert_faces = true
+width = 8.0
+height = 10.0
+depth = 5.0
+material = SubResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.69973, -0.365044, 0 )
+invert_faces = true
+width = 10.0
+height = 5.0
+depth = 4.0
+material = SubResource( 1 )
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210812, 0, 6.17499 )
+invert_faces = true
+width = 4.0
+height = 5.0
+depth = 6.0
+
+[node name="area_trigger" parent="CSGCombiner" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.3724 )
+
+[node name="Box" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.11001 )
+
+[node name="Box2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29753, 0, 6.11001 )
+
+[node name="Box3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74644, 0, 3.7125 )
+
+[node name="Box4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74644, 2.20769, 3.7125 )
